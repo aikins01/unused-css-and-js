@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.jsoup.Jsoup;
@@ -46,6 +48,24 @@ public class UnusedResourceAnalyzer {
             System.out.println(resource);
         }
 
-        System.out.println("Hello, World!");
+        List<String> potentiallyUnusedResources = new ArrayList<>();
+        Elements allElements = doc.getAllElements();
+        for (String resource : referencedResources) {
+            boolean found = false;
+            for (Element element : allElements) {
+                if (element.attr("src").equals(resource) || element.attr("href").equals(resource)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                potentiallyUnusedResources.add(resource);
+            }
+        }
+
+        System.out.println("\nPotentially unused resources:");
+        for (String resource : potentiallyUnusedResources) {
+            System.out.println(resource);
+        }
     }
 }

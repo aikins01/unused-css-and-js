@@ -3,6 +3,7 @@
   "java.project.outputPath": "bin",
   "java.project.referencedLibraries": [
     "lib/**/*.jar",
-    "/Users/aikins01/Downloads/Selenium Java 4.18.1/**/*.jar"
+    "/Users/aikins01/Downloads/Selenium Java 4.18.1/**/*.jar",
+    "/Users/aikins01/Downloads/jsoup 1.17.2.jar"
   ]
 }

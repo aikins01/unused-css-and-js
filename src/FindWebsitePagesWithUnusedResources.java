@@ -38,17 +38,6 @@ public class FindWebsitePagesWithUnusedResources {
         // Get the page source
         String pageSource = driver.getPageSource();
 
-        // Analyze unused resources
-        List<String> potentiallyUnusedResources = analyzeUnusedResources(pageSource);
-        if (potentiallyUnusedResources.isEmpty()) {
-            System.out.println("No potentially unused resources found for " + currentPageUrl);
-        } else {
-            System.out.println("Potentially unused resources for " + currentPageUrl + ":");
-            for (String resource : potentiallyUnusedResources) {
-                System.out.println(resource);
-            }
-        }
-
         List<WebElement> links = driver.findElements(By.tagName("a"));
         for (WebElement link : links) {
             try {
@@ -56,6 +45,18 @@ public class FindWebsitePagesWithUnusedResources {
                 if (linkUrl != null && linkUrl.startsWith("https://www.history.navy.mil/")
                         && !linkUrl.equals("https://www.history.navy.mil/")) {
                     System.out.println("found a link in the current domain " + linkUrl);
+
+                    // Analyze unused resources for the current page
+                    List<String> potentiallyUnusedResources = analyzeUnusedResources(pageSource);
+                    if (potentiallyUnusedResources.isEmpty()) {
+                        System.out.println("No potentially unused resources found for " + currentPageUrl);
+                    } else {
+                        System.out.println("Potentially unused resources for " + currentPageUrl + ":");
+                        for (String resource : potentiallyUnusedResources) {
+                            System.out.println(resource);
+                        }
+                    }
+
                     explorePages(driver, visitedPages, linkUrl);
                 }
             } catch (StaleElementReferenceException e) {

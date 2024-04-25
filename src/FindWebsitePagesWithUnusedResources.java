@@ -18,7 +18,7 @@ public class FindWebsitePagesWithUnusedResources {
     public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver", "lib/webdrivers/chromedriver");
         WebDriver driver = new ChromeDriver();
-        String url = "https://www.history.navy.mil";
+        String url = "https://www.ghanaweb.com";
         driver.get(url);
         Set<String> visitedPages = new HashSet<>();
         explorePages(driver, visitedPages, url);
